@@ -18,13 +18,28 @@ function Users() {
   }, []);
 
   return (
-    <div>
-      <h2>Users</h2>
-      <ul>
-        {users.map((user, idx) => (
-          <li key={user.id || idx}>{JSON.stringify(user)}</li>
-        ))}
-      </ul>
+    <div className="card p-4">
+      <h3 className="mb-3">Users</h3>
+      <div className="table-responsive">
+        <table className="table table-striped table-hover">
+          <thead className="table-light">
+            <tr>
+              {users[0] && Object.keys(users[0]).map((key) => (
+                <th key={key}>{key}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, idx) => (
+              <tr key={user.id || idx}>
+                {Object.values(user).map((val, i) => (
+                  <td key={i}>{typeof val === 'object' ? JSON.stringify(val) : val}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

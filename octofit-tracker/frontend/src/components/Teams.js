@@ -18,13 +18,28 @@ function Teams() {
   }, []);
 
   return (
-    <div>
-      <h2>Teams</h2>
-      <ul>
-        {teams.map((team, idx) => (
-          <li key={team.id || idx}>{JSON.stringify(team)}</li>
-        ))}
-      </ul>
+    <div className="card p-4">
+      <h3 className="mb-3">Teams</h3>
+      <div className="table-responsive">
+        <table className="table table-striped table-hover">
+          <thead className="table-light">
+            <tr>
+              {teams[0] && Object.keys(teams[0]).map((key) => (
+                <th key={key}>{key}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {teams.map((team, idx) => (
+              <tr key={team.id || idx}>
+                {Object.values(team).map((val, i) => (
+                  <td key={i}>{typeof val === 'object' ? JSON.stringify(val) : val}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

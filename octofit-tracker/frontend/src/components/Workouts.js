@@ -18,13 +18,28 @@ function Workouts() {
   }, []);
 
   return (
-    <div>
-      <h2>Workouts</h2>
-      <ul>
-        {workouts.map((workout, idx) => (
-          <li key={workout.id || idx}>{JSON.stringify(workout)}</li>
-        ))}
-      </ul>
+    <div className="card p-4">
+      <h3 className="mb-3">Workouts</h3>
+      <div className="table-responsive">
+        <table className="table table-striped table-hover">
+          <thead className="table-light">
+            <tr>
+              {workouts[0] && Object.keys(workouts[0]).map((key) => (
+                <th key={key}>{key}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {workouts.map((workout, idx) => (
+              <tr key={workout.id || idx}>
+                {Object.values(workout).map((val, i) => (
+                  <td key={i}>{typeof val === 'object' ? JSON.stringify(val) : val}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -18,13 +18,28 @@ function Leaderboard() {
   }, []);
 
   return (
-    <div>
-      <h2>Leaderboard</h2>
-      <ul>
-        {leaderboard.map((entry, idx) => (
-          <li key={entry.id || idx}>{JSON.stringify(entry)}</li>
-        ))}
-      </ul>
+    <div className="card p-4">
+      <h3 className="mb-3">Leaderboard</h3>
+      <div className="table-responsive">
+        <table className="table table-striped table-hover">
+          <thead className="table-light">
+            <tr>
+              {leaderboard[0] && Object.keys(leaderboard[0]).map((key) => (
+                <th key={key}>{key}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {leaderboard.map((entry, idx) => (
+              <tr key={entry.id || idx}>
+                {Object.values(entry).map((val, i) => (
+                  <td key={i}>{typeof val === 'object' ? JSON.stringify(val) : val}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
